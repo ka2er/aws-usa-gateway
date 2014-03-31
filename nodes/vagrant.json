@@ -1,0 +1,11 @@
+{
+  "dnsmasq" : {
+	  "dns" : {
+		 "server" : "8.8.8.8",
+		 "address" : "/netflix.com/192.168.0.1"
+	  }
+  },	
+  "run_list": [
+    "recipe[dnsmasq]"
+  ]
+}

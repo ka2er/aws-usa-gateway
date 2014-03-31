@@ -1,0 +1,10 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    dnsmasq (0.2.0)
+      hosts_file (>= 0.0.0)
+    hosts_file (0.2.0)
+
+DEPENDENCIES
+  dnsmasq (>= 0)
+
