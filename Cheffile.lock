@@ -1,10 +1,16 @@
 SITE
   remote: http://community.opscode.com/api/v1
   specs:
+    build-essential (2.0.0)
+    cpu (0.2.0)
     dnsmasq (0.2.0)
       hosts_file (>= 0.0.0)
+    haproxy (1.6.2)
+      build-essential (>= 0.0.0)
+      cpu (>= 0.2.0)
     hosts_file (0.2.0)
 
 DEPENDENCIES
   dnsmasq (>= 0)
+  haproxy (>= 0)
 
