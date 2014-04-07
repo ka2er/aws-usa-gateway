@@ -66,6 +66,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = ""
   end
+  #
+  # start docker provisionning : ha-proxy !!
+  #
+  config.vm.provision "docker" do |d|
+    
+    d.build_image "/vagrant/ha-proxy"
+  end
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
@@ -93,31 +100,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
-    
-  # ensure we have chef
-  config.omnibus.chef_version = :latest
-  
-  # download automatically chef cookbooks
-  config.librarian_chef.cheffile_dir = Pathname(__FILE__).dirname
-
-  # read some config from externals dir node
-  VAGRANT_JSON = JSON.parse(Pathname(__FILE__).dirname.join('nodes', 'vagrant.json').read)
-  
-  # launch chef recipes
-  config.vm.provision "chef_solo" do |chef|
-     chef.cookbooks_path = ["site-cookbooks", "cookbooks"]
-     chef.roles_path = "roles"
-     chef.data_bags_path = "data_bags"
-  #   chef.add_recipe "mysql"
-  #   chef.add_role "web"
-  #
-  #   # You may also specify custom JSON attributes:
-  #   chef.json = { :mysql_password => "foo" }
-
-     chef.run_list = VAGRANT_JSON.delete('run_list')
-     chef.json = VAGRANT_JSON
-  
-  end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
