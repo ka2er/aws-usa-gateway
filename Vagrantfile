@@ -67,12 +67,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.ssh.private_key_path = ""
   end
   #
-  # start docker provisionning : ha-proxy !!
+  # start shell provisionning
   #
-  config.vm.provision "docker" do |d|
-    
-    d.build_image "/vagrant/ha-proxy"
-  end
+  config.vm.provision "shell", path: "provision.sh"
+
+  
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
