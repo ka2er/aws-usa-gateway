@@ -1,7 +1,7 @@
 aws-usa-gateway
 ===============
 
-vagrant project to build a dnsmasq+haproxy vm hosted on AWS/USA to access to netflix
+vagrant project to build a dnsmasq+haproxy vm hosted on AWS/USA to access netflix
 
 Installation
 ------------
