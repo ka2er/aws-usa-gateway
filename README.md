@@ -12,14 +12,24 @@ Installation
 ```
 
 
-edit VagrantFile to fill your aws settings
+edit Vagrantfile to fill in your aws settings
 
 
 ```
 vagrant up --provider=aws
 ```
 
-note the public IP that get used and use it as DNS server
+note the public IP that get allocated and use it as DNS server
+
+Development
+-----------
+
+There is also a provider for virtualbox in order to test the setup
+
+```
+vagrant up --provider=virtualbox
+```
+
 
 Credits
 -------
