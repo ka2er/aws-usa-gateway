@@ -1,0 +1,6 @@
+---
+# file : dnsservers.yml
+- hosts: dnsservers
+  roles:
+    - common
+    - dns

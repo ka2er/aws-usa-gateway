@@ -1,0 +1,4 @@
+---
+# file roles/proxy/hanlders/main.yml
+- name: restart haproxy
+  service: name=haproxy state=restarted

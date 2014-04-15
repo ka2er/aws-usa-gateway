@@ -1,0 +1,4 @@
+---
+# file site.yml
+- include: proxyservers.yml
+- include: dnsservers.yml

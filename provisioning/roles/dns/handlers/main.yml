@@ -1,0 +1,4 @@
+---
+# file roles/dns/handlers/main.yml
+- name: restart dnsmasq
+  service: name=dnsmasq state=restarted

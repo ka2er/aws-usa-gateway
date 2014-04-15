@@ -1,0 +1,15 @@
+---
+# file: roles/dns/tasks/main.yml
+- name: be sure dnsmasq is installed
+  apt: pkg=dnsmasq state=installed
+  tags: dns
+
+- name: be sure dnsmasq is configured (and change IP dst:208.110.82.54 by aws public IP)
+  replace: src=/tmp/tunlr-style-dns-unblocking/poor-mans-dnsmasq.txt dest=/etc/dnsmasq.d/usa-gateway owner=root group=root regexp='208.110.82.54' replace='TODO:setawsIP here'
+  notify:
+    - restart dnsmasq
+  tags: dns
+  
+- name: be sure dnsmasq is running and enabled
+  service: name=dnsmasq state=running enabled=yes
+  tags: dns

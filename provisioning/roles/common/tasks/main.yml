@@ -1,0 +1,8 @@
+---
+- name: be sure git is installed
+  apt: pkg=git state=installed
+
+- name: retrieve templates from github (Thanks to trick77)
+  git: repo=https://github.com/trick77/tunlr-style-dns-unblocking.git
+       dest=/tmp/tunlr-style-dns-unblocking
+       version=af1eb6a8abc5f78dce198db608e33eec776346fc

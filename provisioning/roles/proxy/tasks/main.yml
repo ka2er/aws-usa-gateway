@@ -1,0 +1,19 @@
+---
+# file: roles/proxy/tasks/main.yml
+- name: add haproxy repository
+  apt_repository: repo='ppa:vbernat/haproxy-1.5'  
+  tags: proxy
+
+- name: be sure haproxy is installed
+  apt: pkg=haproxy state=installed
+  tags: proxy
+  
+- name: be sure haproxy is configured
+  command: cp /tmp/tunlr-style-dns-unblocking/poor-mans-haproxy.conf /etc/haproxy/haproxy.cfg
+  notify:
+    - restart haproxy
+  tags: proxy
+  
+- name: be sure haproxy is running and enabled
+  service: name=haproxy state=running enabled=yes
+  tags: proxy

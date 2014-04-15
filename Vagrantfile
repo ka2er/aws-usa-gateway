@@ -67,10 +67,32 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.ssh.private_key_path = ""
   end
   #
-  # start shell provisionning
+  # ansible provisionning
   #
-  config.vm.provision "shell", path: "provision.sh"
-
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provisioning/site.yml"
+    #ansible.inventory_path = "provisioning/stage"
+    #ansible.limit = 'all'
+    ansible.verbose = 'vvv'
+    ansible.sudo = true
+    ansible.extra_vars = { 
+      proxyservers: {
+        ansible_ssh_user: 'vagrant' 
+      }
+    }
+    
+    ansible.groups = {
+      "dnsservers" => ["omv.local"],
+      "proxyservers" => ["default"]
+    }
+    
+    # provision amazon with haproxy
+    # get ip of amazon vm
+    # provision omv with dnsmasq
+    # put config in omv to serve amazon as DNS of particular services
+    
+  end
+  
   
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
