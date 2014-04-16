@@ -1,0 +1,5 @@
+# file: stage 
+# replace omv.local with the name of the server you will use as dnsmasq service
+
+[dnsservers]
+#your_dnsmasq_host ansible_ssh_user=login_to_use ansible_ssh_private_key_file=/full_path_to_your_private_ssh_key

@@ -1,6 +1,8 @@
 ---
 # file : dnsservers.yml
-- hosts: dnsservers
+- name: Deploy dnsmasq
+  hosts: dnsservers
+  gather_facts: no
   roles:
     - common
     - dns

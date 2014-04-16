@@ -65,32 +65,36 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = ""
-  end
   #
-  # ansible provisionning
+  # ansible provisionning : no inventory to force vagrant to generate new one
+  #
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provisioning/proxyservers.yml"
+    
+    ansible.groups = {
+       "proxyservers" => ["default"]
+    }
+     
+    ansible.sudo = true
+  end
+
+  #
+  # another bloc just to gather ext IP + prov dns
   #
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "provisioning/site.yml"
-    #ansible.inventory_path = "provisioning/stage"
-    #ansible.limit = 'all'
-    ansible.verbose = 'vvv'
+    
+    # here the directory with files linking to genereated inventory and my personnal static one
+    ansible.inventory_path = "inventory"
+    # debug script if need
+    #ansible.verbose = 'vvvv'
     ansible.sudo = true
-    ansible.extra_vars = { 
-      proxyservers: {
-        ansible_ssh_user: 'vagrant' 
-      }
-    }
-    
-    ansible.groups = {
-      "dnsservers" => ["omv.local"],
-      "proxyservers" => ["default"]
-    }
-    
-    # provision amazon with haproxy
-    # get ip of amazon vm
-    # provision omv with dnsmasq
-    # put config in omv to serve amazon as DNS of particular services
-    
+
+    # on joue pas les play type proxy
+    ansible.skip_tags = "proxy"
+
+    # prevent hosts to be limited to vagrant handled only
+    ansible.limit = "all"
   end
   
   

@@ -1,4 +1,5 @@
 ---
 # file site.yml
 - include: proxyservers.yml
+- include: gatherip.yml
 - include: dnsservers.yml

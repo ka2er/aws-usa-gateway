@@ -4,12 +4,16 @@
   apt: pkg=dnsmasq state=installed
   tags: dns
 
-- name: be sure dnsmasq is configured (and change IP dst:208.110.82.54 by aws public IP)
-  replace: src=/tmp/tunlr-style-dns-unblocking/poor-mans-dnsmasq.txt dest=/etc/dnsmasq.d/usa-gateway owner=root group=root regexp='208.110.82.54' replace='TODO:setawsIP here'
+- name: be sure dnsmasq has vanilla configuration file
+  command: cp /tmp/tunlr-style-dns-unblocking/poor-mans-dnsmasq.txt /etc/dnsmasq.d/usa-gateway
+  tags: dns
+
+- name: update dnsmasq configuration by replacing IP dst:208.110.82.54 by proxy public IP
+  command: sed -i 's/208.110.82.54/{{ hostvars['default']['public_ip'].stdout }}/g' /etc/dnsmasq.d/usa-gateway
   notify:
     - restart dnsmasq
   tags: dns
-  
+   
 - name: be sure dnsmasq is running and enabled
   service: name=dnsmasq state=running enabled=yes
   tags: dns

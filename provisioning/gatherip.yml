@@ -1,0 +1,11 @@
+---
+# file : gatherip.yml
+- name: Gather public IP
+  hosts: proxyservers
+  gather_facts: no
+  
+  tasks:
+  - name: Wget ipecho.net
+    shell: wget -qO - http://ipecho.net/plain
+    register: public_ip
+    ignore_errors: True
