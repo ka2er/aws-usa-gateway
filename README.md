@@ -9,8 +9,8 @@ The purpose of this vagrant / ansible project is to build 2 box :
 Installation
 ------------
 
+```
 ./pre-install.sh
-
 ```
 Configuration
 -------------
